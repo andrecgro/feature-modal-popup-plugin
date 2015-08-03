@@ -4,13 +4,13 @@ Popup Plugin is a Wordpress plugin that allows you to add a beautiful modal dial
 
 ##Install
 
-*Extracting the files
+###Extracting the files
 
 1. You can download the plugin from our Wordpress Plugin Page;
 2. Extract it inside `wp-content/plugins`;
 3. Activate the plugin inside the Administration Panels of your site;
 
-*Installing from Administration Panel of your website
+###Installing from Administration Panel of your website
 
 1. Go to `Add new Plugin` page;
 2. Search for `Popup Plugin`;
