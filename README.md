@@ -23,3 +23,7 @@ Popup Plugin is a Wordpress plugin that allows you to add a beautiful modal dial
 2. Get your page/post id ( You just need to get the number after `/?p=` in page/post permalink );
 3. Create an widget or use the shortcode `<?php do_shortcode('popup-plugin[$contentID]'); ?>` in your child theme.
 4. That will shows a default feature section linkable to a modal with the content ID;
+
+##License
+
+Created by and copyright [André Rocha](https://github.com/andrecgro). Released under the GNU General Public License.
