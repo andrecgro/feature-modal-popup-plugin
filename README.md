@@ -16,7 +16,7 @@ Modal Popup Plugin is a Wordpress plugin that allows you to add a beautiful moda
 2. Search for `Modal Popup Plugin`;
 3. Click `Install`;
 4. Activate the plugin inside `Plugins page`;
-
+ 
 ##Usage
 
 1. Create the page/post with the content you want to show in your modal dialog;
