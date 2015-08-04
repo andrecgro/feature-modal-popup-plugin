@@ -1,6 +1,6 @@
-# Modal Popup Plugin
+# Feature and Modal Popup Plugin
 
-Modal Popup Plugin is a Wordpress plugin that allows you to add a beautiful modal dialog with the content of a specified page or post;
+Feature and Modal Popup Plugin is a Wordpress plugin that allows you to create a beautiful section of features with modal dialog popups;
 
 ##Install
 
@@ -13,7 +13,7 @@ Modal Popup Plugin is a Wordpress plugin that allows you to add a beautiful moda
 ###Installing from Administration Panel of your website
 
 1. Go to `Add new Plugin` page;
-2. Search for `Modal Popup Plugin`;
+2. Search for `Featuer and Modal Popup Plugin`;
 3. Click `Install`;
 4. Activate the plugin inside `Plugins page`;
 
@@ -21,10 +21,9 @@ Modal Popup Plugin is a Wordpress plugin that allows you to add a beautiful moda
 
 1. Create the page/post with the content you want to show in your modal dialog;
 2. Get your page/post id ( You just need to get the number after `/?p=` in page/post permalink );
-3. Create an widget or use the shortcode `<?php do_shortcode('modal-popup-plugin[$contentID]'); ?>` in your child theme.
+3. Create an widget or use the shortcode `<?php do_shortcode('feature-modal-popup-plugin[$contentID]'); ?>` in your child theme.
 4. That will shows a default feature section linkable to a modal with the content ID;
 
 ##License
 
 Created by and copyright [André Rocha](https://github.com/andrecgro). Released under the GNU General Public License.
-This Plugin was completely made using files and functions found in [Zerif Lite Theme](https://wordpress.org/themes/zerif-lite/) as guides.

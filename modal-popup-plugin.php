@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Modal Popup Plugin
+Plugin Name: Feature and Modal Popup Plugin
 Plugin URI:
-Description: A plugin to help you create beautiful modal popup with your pages content based on it's ID;
+Description: A plugin to help you create a beautiful section of features with modal popup;
 Version: 1.0
 Author: André Rocha
 Author URI: https://github.com/andrecgro
@@ -31,14 +31,25 @@ License: GPLv2
 
 ?>
 
+
 <?php
   add_action('admin_menu', 'mpp_setup_menu_page');
 
-  function mpp_setup_menu_page(){
-    add_menu_page('Modal Popup Plugin Page','Modal Popup Plugin','manage_options','mpp', 'mpp_setup_options_page' );
-  }
+    function mpp_setup_menu_page(){
+    add_menu_page('Modal Popup Plugin Page','Modal Popup Plugin','manage_options','mpp', 'mpp_setup_options_page' , '' ,'20.1');
+    add_submenu_page('mpp', 'Adicionar Nova Feature', 'Adicionar Nova Feature','manage_options', 'new_feature' , 'mpp_setup_new_feature_page');
+}
 
-  function mpp_setup_options_page(){
-    echo "<h1>Hello World</h1>";
-  }
+
+    function mpp_setup_options_page(){
+
+      if ( !current_user_can( 'manage_options' ) )  {
+  		    wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+  	  }
+    }
+
+    function mpp_setup_new_feature_page(){
+
+          include 'template.php';
+    }
 ?>
