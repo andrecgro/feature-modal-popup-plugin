@@ -13,7 +13,7 @@ Feature and Modal Popup Plugin is a Wordpress plugin that allows you to create a
 ###Installing from Administration Panel of your website
 
 1. Go to `Add new Plugin` page;
-2. Search for `Featuer and Modal Popup Plugin`;
+2. Search for `Feature and Modal Popup Plugin`;
 3. Click `Install`;
 4. Activate the plugin inside `Plugins page`;
 
