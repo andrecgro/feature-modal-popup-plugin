@@ -31,7 +31,10 @@ Domain Paths: /languages
 
 
 <?php
-
+/*
+* Keeping the plugin safe and not allowing direct access to it's files
+*/
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 /**
  * Adds the plugin post type
  */
@@ -43,10 +46,12 @@ function fmp_create_post_feature() {
               'singular_name' => 'Feature',
               'edit_item' => __( 'Edit' ) . ' Feature',
               'add_new' => __( 'Add' ) . ' nova',
+              'add_new_item' => __('Add').' nova Feature',
               'menu_name' => 'Feature with Modal Popup',
               'all_items' => 'Features'
           ),
           'public' => true,
+          'menu_icon' => 'dashicons-desktop'
       )
   );
 }
@@ -54,18 +59,65 @@ function fmp_create_post_feature() {
 add_action( 'init', 'fmp_create_post_feature' );
 
 /**
- * Adds a meta box to the post editing screen
+ * Adds a color pickermeta box to the post editing screen
  */
 function fmp_color_metabox() {
-    add_meta_box( 'fmp_color_picker', __( 'Border Color', 'fmp_tdm' ), 'fmp_color_metabox_callback', 'feature' );
+    add_meta_box( 'fmp_color_picker', __( 'Feature Icon Border Color', 'fmp_tdm' ), 'fmp_color_metabox_callback', 'feature', 'side', 'low' );
 }
 add_action( 'add_meta_boxes', 'fmp_color_metabox' );
 
 /**
- * Include the file to outputs the content of the color meta box
+ * Outputs the content of the color meta box
  */
-function fmp_color_metabox_callback( $post ) {
-    echo 'This is a meta box';
+function fmp_color_metabox_callback( $post ) {?>
+  <p>
+      <label for="meta-color" class="prfx-row-title"><?php _e( 'Color Picker', 'fmp_tdm' )?></label>
+      <input name="meta-color" type="text" value="<?php if ( isset ( $prfx_stored_meta['meta-color'] ) ) echo $prfx_stored_meta['meta-color'][0]; ?>" class="meta-color" />
+  </p>
+<?php
+}
+
+/**
+ * Loads the color picker javascript
+ */
+function fmp_color_enqueue() {
+    global $typenow;
+    if( $typenow == 'feature' ) {
+        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_script( 'metabox-color-js', plugin_dir_url( __FILE__ ) . 'js/metabox-color.js', array( 'wp-color-picker' ) );
+    }
+}
+add_action( 'admin_enqueue_scripts', 'fmp_color_enqueue' );
+
+/**
+ * Removing options to set the color picker position
+ */
+ add_action( 'add_meta_boxes', 'my_remove_meta_boxes', 0 );
+function my_remove_meta_boxes(){
+	global $wp_meta_boxes;
+	unset( $wp_meta_boxes['post']['side']['core']['tagsdiv-post_tag'] );
+	add_meta_box( 'tagsdiv-post_tag', 'Example title', 'post_tags_meta_box', 'post', 'normal', 'core', array( 'taxonomy' => 'post_tag' ));
+	//print '<pre>';print_r( $wp_meta_boxes['post'] );print '<pre>';
+}
+
+
+/**
+ * Adds a text meta box to the post editing screen
+ */
+function fmp_excerpt_metabox() {
+    add_meta_box( 'fmp_excerpt_limit', __( 'Feature Excerpt Limit', 'fmp_tdm' ), 'fmp_excerpt_metabox_callback', 'feature', 'side', 'low' );
+}
+add_action( 'add_meta_boxes', 'fmp_excerpt_metabox' );
+
+/**
+ * Outputs the excerpt metabox
+ */
+
+function fmp_excerpt_metabox_callback( $post ) {?>
+  <p>
+      Hello world
+  </p>
+<?php
 }
 
 ?>
