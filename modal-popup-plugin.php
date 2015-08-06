@@ -75,7 +75,10 @@ add_action( 'add_meta_boxes', 'fmp_color_metabox' );
 /**
  * Outputs the content of the color meta box
  */
-function fmp_color_metabox_callback( $post ) {?>
+function fmp_color_metabox_callback( $post ) {
+    wp_nonce_field( basename( __FILE__ ), 'fmp_color_nonce' );
+    $fmp_stored_meta = get_post_meta( $post->ID );
+  ?>
   <p>
       <label for="meta-color" class="fmp-row-title"><?php _e( 'Color Picker', 'fmp_tdm' )?></label>
       <input name="meta-color" type="text" value="<?php if ( isset ( $fmp_stored_meta['meta-color'] ) ) echo $fmp_stored_meta['meta-color'][0]; ?>" class="meta-color" />
@@ -96,22 +99,10 @@ function fmp_color_enqueue() {
 add_action( 'admin_enqueue_scripts', 'fmp_color_enqueue' );
 
 /**
- * Removing options to set the color picker position
- */
- add_action( 'add_meta_boxes', 'my_remove_meta_boxes', 0 );
-function my_remove_meta_boxes(){
-	global $wp_meta_boxes;
-	unset( $wp_meta_boxes['post']['side']['core']['tagsdiv-post_tag'] );
-	add_meta_box( 'tagsdiv-post_tag', 'Example title', 'post_tags_meta_box', 'post', 'normal', 'core', array( 'taxonomy' => 'post_tag' ));
-	//print '<pre>';print_r( $wp_meta_boxes['post'] );print '<pre>';
-}
-
-
-/**
  * Adds a text meta box to the post editing screen
  */
 function fmp_excerpt_metabox() {
-    add_meta_box( 'fmp_excerpt_limit', __( 'Feature Excerpt Limit', 'fmp_tdm' ), 'fmp_excerpt_metabox_callback', 'feature', 'side', 'low' );
+    add_meta_box( 'fmp-excerpt-limit', __( 'Feature Excerpt Limit', 'fmp_tdm' ), 'fmp_excerpt_metabox_callback', 'feature', 'side', 'low' );
 }
 add_action( 'add_meta_boxes', 'fmp_excerpt_metabox' );
 
@@ -119,18 +110,43 @@ add_action( 'add_meta_boxes', 'fmp_excerpt_metabox' );
  * Outputs the excerpt metabox
  */
 
-function fmp_excerpt_metabox_callback( $post ) {?>
+function fmp_excerpt_metabox_callback( $post ) {
+  ?>
   <p>
-    <label for="meta-select" class="fmp-row-title"><?php _e( 'Excerpt Length in Words', 'fmp_tdm' )?></label>
-    <select name="meta-select" id="meta-select">
-        <option value="select-one" <?php if ( isset ( $fmp_stored_meta['meta-select'] ) ) selected( $fmp_stored_meta['meta-select'][0], 'select-one' ); ?>><?php _e( 'Five', 'fmp_tdm' )?></option>';
-        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['meta-select'] ) ) selected( $fmp_stored_meta['meta-select'][0], 'select-two' ); ?>><?php _e( 'Ten', 'fmp_tdm' )?></option>';
-        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['meta-select'] ) ) selected( $fmp_stored_meta['meta-select'][0], 'select-three' ); ?>><?php _e( 'Fifteen', 'fmp_tdm' )?></option>';
-        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['meta-select'] ) ) selected( $fmp_stored_meta['meta-select'][0], 'select-four' ); ?>><?php _e( 'Twenty', 'fmp_tdm' )?></option>';
+    <label for="fmp-excerpt-limit" class="fmp-row-title"><?php _e( 'Excerpt Length in Words', 'fmp_tdm' )?></label>
+    <select name="fmp-excerpt-limit" id="fmp-excerpt-limit">
+        <option value="select-one" <?php if ( isset ( $fmp_stored_meta['fmp-excerpt-limit'] ) ) selected( $fmp_stored_meta['fmp-excerpt-limit'][0], 'select-one' ); ?>><?php _e( 'Five', 'fmp_tdm' )?></option>';
+        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['fmp-excerpt-limit'] ) ) selected( $fmp_stored_meta['fmp-excerpt-limit'][0], 'select-two' ); ?>><?php _e( 'Ten', 'fmp_tdm' )?></option>';
+        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['fmp-excerpt-limit'] ) ) selected( $fmp_stored_meta['fmp-excerpt-limit'][0], 'select-three' ); ?>><?php _e( 'Fifteen', 'fmp_tdm' )?></option>';
+        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['fmp-excerpt-limit'] ) ) selected( $fmp_stored_meta['fmp-excerpt-limit'][0], 'select-four' ); ?>><?php _e( 'Twenty', 'fmp_tdm' )?></option>';
     </select>
 </p>
 <?php
 }
+
+
+/**
+ * Saves the custom color picker meta input
+ */
+ function fmp_meta_color_save( $post_id ) {
+
+     // Checks save status
+     $is_autosave = wp_is_post_autosave( $post_id );
+     $is_revision = wp_is_post_revision( $post_id );
+     $is_valid_nonce = ( isset( $_POST[ 'fmp_color_nonce' ] ) && wp_verify_nonce( $_POST[ 'fmp_color_nonce' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
+
+     // Exits script depending on save status
+     if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
+         return;
+     }
+
+     // Checks for input and sanitizes/saves if needed
+     if( isset( $_POST[ 'meta-color' ] ) ) {
+         update_post_meta( $post_id, 'meta-color', sanitize_text_field( $_POST[ 'meta-color' ] ) );
+     }
+
+ }
+add_action( 'save_post', 'fmp_meta_color_save' );
 
 
 ?>
