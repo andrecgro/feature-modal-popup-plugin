@@ -51,7 +51,13 @@ function fmp_create_post_feature() {
               'all_items' => 'Features'
           ),
           'public' => true,
-          'menu_icon' => 'dashicons-desktop'
+          'menu_icon' => 'dashicons-desktop',
+          'supports' => array(
+              'title',
+              'editor',
+              'thumbnail'
+           ),
+
       )
   );
 }
@@ -71,8 +77,8 @@ add_action( 'add_meta_boxes', 'fmp_color_metabox' );
  */
 function fmp_color_metabox_callback( $post ) {?>
   <p>
-      <label for="meta-color" class="prfx-row-title"><?php _e( 'Color Picker', 'fmp_tdm' )?></label>
-      <input name="meta-color" type="text" value="<?php if ( isset ( $prfx_stored_meta['meta-color'] ) ) echo $prfx_stored_meta['meta-color'][0]; ?>" class="meta-color" />
+      <label for="meta-color" class="fmp-row-title"><?php _e( 'Color Picker', 'fmp_tdm' )?></label>
+      <input name="meta-color" type="text" value="<?php if ( isset ( $fmp_stored_meta['meta-color'] ) ) echo $fmp_stored_meta['meta-color'][0]; ?>" class="meta-color" />
   </p>
 <?php
 }
@@ -115,9 +121,16 @@ add_action( 'add_meta_boxes', 'fmp_excerpt_metabox' );
 
 function fmp_excerpt_metabox_callback( $post ) {?>
   <p>
-      Hello world
-  </p>
+    <label for="meta-select" class="fmp-row-title"><?php _e( 'Excerpt Length in Words', 'fmp_tdm' )?></label>
+    <select name="meta-select" id="meta-select">
+        <option value="select-one" <?php if ( isset ( $fmp_stored_meta['meta-select'] ) ) selected( $fmp_stored_meta['meta-select'][0], 'select-one' ); ?>><?php _e( 'Five', 'fmp_tdm' )?></option>';
+        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['meta-select'] ) ) selected( $fmp_stored_meta['meta-select'][0], 'select-two' ); ?>><?php _e( 'Ten', 'fmp_tdm' )?></option>';
+        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['meta-select'] ) ) selected( $fmp_stored_meta['meta-select'][0], 'select-three' ); ?>><?php _e( 'Fifteen', 'fmp_tdm' )?></option>';
+        <option value="select-two" <?php if ( isset ( $fmp_stored_meta['meta-select'] ) ) selected( $fmp_stored_meta['meta-select'][0], 'select-four' ); ?>><?php _e( 'Twenty', 'fmp_tdm' )?></option>';
+    </select>
+</p>
 <?php
 }
+
 
 ?>
