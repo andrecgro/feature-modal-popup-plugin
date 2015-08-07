@@ -190,6 +190,7 @@ function fmp_limit_excerpt_save( $post_id ) {
 }
 add_action( 'save_post', 'fmp_limit_excerpt_save' );
 
+
 /**
  * Adding bootstrap
  */
@@ -226,11 +227,11 @@ add_filter( 'template_include', 'fmp_force_template' );
 /**
  * enqueue scripts and styles
  */
-function theme_name_scripts() {
+function fmp_enqueues() {
 	wp_enqueue_style( 'style-name', plugin_dir_url(__FILE__) . '/css/style.css' );
 }
 
-add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
+add_action( 'wp_enqueue_scripts', 'fmp_enqueues' );
 
 
 ?>
