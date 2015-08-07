@@ -189,7 +189,31 @@ function fmp_limit_excerpt_save( $post_id ) {
 
 }
 add_action( 'save_post', 'fmp_limit_excerpt_save' );
+/**
+ * Echoes first image from a post
+ */
 
+function fmp_echo_first_image( $postID ) {
+	$args = array(
+		'numberposts' => 1,
+		'order' => 'ASC',
+		'post_mime_type' => 'image',
+		'post_parent' => $postID,
+		'post_status' => null,
+		'post_type' => 'attachment',
+	);
+
+	$attachments = get_children( $args );
+
+	if ( $attachments ) {
+		foreach ( $attachments as $attachment ) {
+			$image_attributes = wp_get_attachment_image_src( $attachment->ID, 'full' );
+
+			echo '<img class="img-responsive" src="' . wp_get_attachment_thumb_url( $attachment->ID ) . '" class="current" width="'.$image_attributes[1].'" height="auto">';
+		}
+	}
+}
+add_action( 'save_post', 'fmp_echo_first_image' );
 
 /**
  * Adding bootstrap

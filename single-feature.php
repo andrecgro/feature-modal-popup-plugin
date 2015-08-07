@@ -65,11 +65,20 @@ define('WP_USE_THEMES', false); get_header(); ?>
              <div class="modal-body">
 
                  <div class="row">
+                   <div class="col-md-4 col-sm-12 col-xs-12">
+                     <?php fmp_echo_first_image(get_the_ID()); ?>
+                   </div>
 
-                 <div class="content col-md-12 col-sm-12 col-xs-12">
+                 <div class="content col-md-8 col-sm-12 col-xs-12">
                          <?php
-                                echo get_the_content();
-                             ?>
+
+                         ob_start();
+                         the_content();
+                         $postOutput = preg_replace('/<img[^>]+./','', ob_get_contents());
+                         ob_end_clean();
+                         echo $postOutput;
+                      ?>
+
                      </div><!--//content-->
                  </div><!--//row-->
              </div><!--//modal-body-->
