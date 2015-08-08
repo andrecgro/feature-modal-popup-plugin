@@ -5,9 +5,9 @@
     border: 10px solid;
     margin-bottom: 20px;
     padding: 20px;
+    border-color:#ececec;
 }
 .fmp-circle:hover{
-  border-color:#bbbbbb!important;
   cursor: pointer;
 }
 #fmp-icon{
@@ -21,7 +21,7 @@
   font-size: 20px;
 }
 #feature-text{
-  margin:10px 50px;
+  margin-top: 10px;
   color: #808080;
 }
 
@@ -35,4 +35,12 @@
   overflow: auto;
   width: auto;
   margin: 0px 15%;
+}
+.modal-img{
+  border:1px solid #ececec;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: -5px;
+  padding: 10px;
+
 }

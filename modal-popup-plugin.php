@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 Plugin Name: Feature with Modal Popup
 Plugin URI:
@@ -39,28 +39,32 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  * Adds the plugin post type
  */
 function fmp_create_post_feature() {
-  register_post_type( 'feature',
-      array(
-          'labels' => array(
-              'name' => 'Features' ,
-              'singular_name' => 'Feature',
-              'edit_item' => __( 'Edit' ) . ' Feature',
-              'add_new' => __( 'Add' ) . ' nova',
-              'add_new_item' => __('Add').' nova Feature',
-              'menu_name' => 'Feature with Modal Popup',
-              'all_items' => 'Features',
-              'rewrite' => array( 'slug' => 'features' ),
-          ),
-          'public' => true,
-          'menu_icon' => 'dashicons-desktop',
-          'supports' => array(
-              'title',
-              'editor',
-              'thumbnail'
-           ),
 
-      )
-  );
+          $labels = array(
+                    'name'          => 'Features' ,
+                    'singular_name' => 'Feature',
+                    'edit_item'     => __( 'Edit' ) . ' Feature',
+                    'add_new'       => __( 'Add' ) . ' nova',
+                    'add_new_item'  => __('Add').' nova Feature',
+                    'menu_name'     => 'Feature with Modal Popup',
+                    'all_items'     => 'Features',
+                    'rewrite'       => array( 'slug' => 'features' ),
+          );
+          $args = array(
+                    'has_archive'   => true,
+                    'public'        => true,
+                    'menu_icon'     => 'dashicons-desktop',
+                    'supports'      => array(
+                                              'title',
+                                              'editor',
+                                              'thumbnail'
+                                            ),
+           );
+
+
+
+  register_post_type('feature',$args);
+
 }
 
 add_action( 'init', 'fmp_create_post_feature' );

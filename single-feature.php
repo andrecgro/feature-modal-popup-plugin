@@ -1,6 +1,6 @@
 <?php
-define('WP_USE_THEMES', false); get_header(); ?>
-<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+get_header();
+    if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
   <div class="row">
     <div class="feature col-md-3 col-sm-6 col-xs-12" id="<?php the_ID()?>">
@@ -47,13 +47,13 @@ define('WP_USE_THEMES', false); get_header(); ?>
         <p class="text-center" id="feature-text">
         <?php
               $content =  get_the_content();
-              $trimmed = wp_trim_words( $content, $limit, ('<br><br><a onclick="addClass()" id="read-more"><p class="on-click text-center">Read more</p></a>') );
+              $trimmed = wp_trim_words( $content, $limit, ('<br><br><a id="read-more"><p class="on-click text-center">Read more</p></a>') );
               print $trimmed;
          ?>
         </p>
       </div>
   </div>
-
+<!--MODAL POPUP-->
   <div  class="modal modal-feature" id="fmpModal" tabindex="-1" role="dialog" aria-labelledby="featureModalLabel-1" aria-hidden="true">
      <div class="modal-dialog modal-lg">
          <div class="modal-content">
@@ -85,6 +85,8 @@ define('WP_USE_THEMES', false); get_header(); ?>
          </div><!--//modal-content-->
      </div><!--//modal-dialog-->
  </div><!--//modal-->
+
+ 
  <script >
  $(document).ready(function(){
    $('.on-click').click(function(){
@@ -96,7 +98,7 @@ define('WP_USE_THEMES', false); get_header(); ?>
 
 <?php endwhile; else: ?>
 <p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
-<?php endif;
+<?php endif;//End of the loop
 
 get_footer();
  ?>
