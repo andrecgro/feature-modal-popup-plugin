@@ -3,7 +3,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+
+      <?php
+      $loop = new WP_Query( array( 'post_type' => 'feature', 'posts_per_page' => '4') );
+       if ( $loop -> have_posts() ) : while ( $loop -> have_posts() ) : $loop->the_post(); ?>
 
 
           <div class="feature col-md-3 col-sm-6 col-xs-12 to-click"  >
@@ -130,5 +133,7 @@ $(document).ready(function(){
 </script>
 
 <?php
+
  get_footer();
+ wp_reset_query();
 ?>
