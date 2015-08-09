@@ -265,8 +265,7 @@ add_action( 'wp_enqueue_scripts', 'fmp_enqueues' );
  * Adding shortcode to call a loop showing all posts(archive-feature.php)
  */
  function fmp_shortcode(){?>
-
-   <div class="container">
+    <h1 class="text-center"><?php echo get_the_title(); ?></h1>
      <div class="row">
        <div class="col-md-12 col-sm-12 col-xs-12">
 
@@ -394,6 +393,7 @@ add_action( 'wp_enqueue_scripts', 'fmp_enqueues' );
      });
      $('.entry-content').css('max-width','none');
      $('.post-edit-link').css('display','none');
+     $('.entry-header').css('display','none');
 
 
    });
