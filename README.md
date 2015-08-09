@@ -19,7 +19,7 @@ Feature and Modal Popup Plugin is a Wordpress plugin that allows you to create a
 
 ##Usage
 
-1. Click in the menu iten created after the plugin instalation ;
+1. Click in the menu iten created after the plugin installation ;
 2. Create a new feature post;
 3. Select the icon feature in `"Featured Image"` section ( 110px X 110px );
 4. Select the feature border color and excerpt limit;
