@@ -50,7 +50,7 @@ function fmp_create_post_feature() {
                     'edit_item'     => __( 'Edit' ) . ' Feature',
                     'add_new'       => __( 'Add' ) . ' nova',
                     'add_new_item'  => __('Add').' nova Feature',
-                    'menu_name'     => 'Feature Modal Plugin',
+                    'menu_name'     => 'Feature Modal Popup Plugin',
                     'all_items'     => 'Features',
                     'rewrite'       => array( 'slug' => 'features' ),
                     'has_archive'   => true,
