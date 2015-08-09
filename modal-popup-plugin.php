@@ -31,6 +31,10 @@ Domain Paths: /languages
 
 
 <?php
+/**
+ * Adding languages files
+ */
+ load_plugin_textdomain('feature-modal', false, basename( dirname( __FILE__ ) ) . '/languages' );
 /*
 * Keeping the plugin safe and not allowing direct access to it's files
 */
@@ -40,17 +44,15 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  */
 function fmp_create_post_feature() {
 
-          $labels = array(
+                  $args = array(
                     'name'          => 'Features' ,
                     'singular_name' => 'Feature',
                     'edit_item'     => __( 'Edit' ) . ' Feature',
                     'add_new'       => __( 'Add' ) . ' nova',
                     'add_new_item'  => __('Add').' nova Feature',
-                    'menu_name'     => 'Feature with Modal Popup',
+                    'menu_name'     => 'Feature Modal Plugin',
                     'all_items'     => 'Features',
                     'rewrite'       => array( 'slug' => 'features' ),
-          );
-          $args = array(
                     'has_archive'   => true,
                     'public'        => true,
                     'menu_icon'     => 'dashicons-desktop',
