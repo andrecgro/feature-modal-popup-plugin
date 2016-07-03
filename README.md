@@ -10,16 +10,9 @@ Feature and Modal Popup Plugin is a Wordpress plugin that allows you to create a
 2. Extract it inside `wp-content/plugins`;
 3. Activate the plugin inside the Administration Panels of your site;
 
-###Installing from Administration Panel of your website
-
-1. Go to `Add new Plugin` page;
-2. Search for `Feature and Modal Popup` plugin;
-3. Click `Install`;
-4. Activate the plugin inside `Plugins page`;
-
 ##Usage
 
-1. Click in the menu iten created after the plugin installation ;
+1. Click in the menu item created after the plugin installation ;
 2. Create a new feature post;
 3. Select the icon feature in `"Featured Image"` section ( 110px X 110px );
 4. Select the feature border color and excerpt limit;
